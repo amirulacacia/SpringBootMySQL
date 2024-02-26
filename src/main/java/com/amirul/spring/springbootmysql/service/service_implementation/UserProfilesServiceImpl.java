@@ -1,6 +1,7 @@
 package com.amirul.spring.springbootmysql.service.service_implementation;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,10 @@ public class UserProfilesServiceImpl implements UserProfilesService {
 
     @Override
     public String deleteUserProfiles(Long id) {
+        userProfilesRepo.findById(id).orElseThrow(() -> new NoSuchElementException("There is no user profile of this id to be delete"));
+        
         userProfilesRepo.deleteById(id);
+
         return "Deleted Successfully";
     }
 

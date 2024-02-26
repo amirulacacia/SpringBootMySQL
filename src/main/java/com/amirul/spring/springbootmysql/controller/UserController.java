@@ -1,6 +1,7 @@
 package com.amirul.spring.springbootmysql.controller;
 
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -33,6 +34,9 @@ public class UserController {
 
     @PostMapping("/create")
     public User createUser(@RequestBody User user) {
+        if (Objects.isNull(user))
+            throw new NullPointerException();
+
         return userService.save(user);
     }
 
@@ -52,12 +56,14 @@ public class UserController {
     }
 
     @PutMapping("/{userid}/add-permissions/{permissionsid}")
-    public User assignPermissionsToUser(@PathVariable("userid") Long userId, @PathVariable("permissionsid") Long permissionId) {
+    public User assignPermissionsToUser(@PathVariable("userid") Long userId,
+            @PathVariable("permissionsid") Long permissionId) {
         return userService.assignPermissionsToUser(userId, permissionId);
     }
 
     @PutMapping("/{userid}/remove-permissions/{permissionsid}")
-    public User removePermissionsFromUser(@PathVariable("userid") Long userId, @PathVariable("permissionsid") Long permissionId) {
+    public User removePermissionsFromUser(@PathVariable("userid") Long userId,
+            @PathVariable("permissionsid") Long permissionId) {
         return userService.removePermissionsFromUser(userId, permissionId);
     }
 

@@ -1,6 +1,7 @@
 package com.amirul.spring.springbootmysql.service.service_implementation;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Set;
 
@@ -69,7 +70,10 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public String deleteUser(Long id) {
+        userRepo.findById(id).orElseThrow(() -> new NoSuchElementException("There is no user of this id to be delete"));
+
         userRepo.deleteById(id);
+
         return "Delete Successfully";
     }
 
