@@ -1,6 +1,8 @@
 package com.amirul.spring.springbootmysql.model;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -9,8 +11,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -39,9 +42,13 @@ public class User {
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private List<UserProfiles> userProfiles;
 
-    @OneToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
-    private UserPermissions userPermissions;
+    @ManyToMany
+    @JoinTable(
+        name = "user_permissions",
+        joinColumns = @JoinColumn(name = "user_id"),
+        inverseJoinColumns = @JoinColumn(name = "permission_id")
+    )
+    private Set<Permissions> assignPermissions = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -59,12 +66,12 @@ public class User {
         this.userProfiles = userProfiles;
     }
 
-    public UserPermissions getUserPermissions() {
-        return userPermissions;
+    public Set<Permissions> getAssignPermissions() {
+        return assignPermissions;
     }
 
-    public void setUserPermissions(UserPermissions userPermissions) {
-        this.userPermissions = userPermissions;
+    public void setAssignPermissions(Set<Permissions> assignPermissions) {
+        this.assignPermissions = assignPermissions;
     }
 
     public String getPassword() {

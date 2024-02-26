@@ -19,4 +19,8 @@ public interface UserService {
     List<User> findAll();
 
     User save(User user);
+
+    User assignPermissionsToUser(Long userId, Long permissionId);
+
+    User removePermissionsFromUser(Long userId, Long permissionId);
 }

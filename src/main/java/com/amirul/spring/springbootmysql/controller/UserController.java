@@ -56,4 +56,14 @@ public class UserController {
         return userService.deleteUser(id);
     }
 
+    @PutMapping("/{userid}/add-permissions/{permissionsid}")
+    public User assignPermissionsToUser(@PathVariable("userid") Long userId, @PathVariable("permissionsid") Long permissionId) {
+        return userService.assignPermissionsToUser(userId, permissionId);
+    }
+
+    @PutMapping("/{userid}/remove-permissions/{permissionsid}")
+    public User removePermissionsFromUser(@PathVariable("userid") Long userId, @PathVariable("permissionsid") Long permissionId) {
+        return userService.removePermissionsFromUser(userId, permissionId);
+    }
+
 }

@@ -2,12 +2,15 @@ package com.amirul.spring.springbootmysql.service.service_implementation;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.amirul.spring.springbootmysql.model.Permissions;
 import com.amirul.spring.springbootmysql.model.User;
+import com.amirul.spring.springbootmysql.repository.PermissionsRepo;
 import com.amirul.spring.springbootmysql.repository.UserRepo;
 import com.amirul.spring.springbootmysql.service.UserService;
 
@@ -16,6 +19,8 @@ import com.amirul.spring.springbootmysql.service.UserService;
 public class UserServiceImpl implements UserService{
     @Autowired
     private UserRepo userRepo;
+    @Autowired
+    private PermissionsRepo permissionsRepo;
 
     @Override
     public List<User> findAll(){
@@ -66,5 +71,35 @@ public class UserServiceImpl implements UserService{
     public String deleteUser(Long id) {
         userRepo.deleteById(id);
         return "Delete Successfully";
+    }
+
+    @Override
+    public User assignPermissionsToUser(Long userId, Long permissionId) {
+        Set<Permissions> permissionsSet = null;
+        
+        User user = userRepo.findById(userId).get();
+        Permissions permissions = permissionsRepo.findById(permissionId).get();
+
+        permissionsSet = user.getAssignPermissions();
+        permissionsSet.add(permissions);
+
+        user.setAssignPermissions(permissionsSet);
+
+        return userRepo.save(user);
+    }
+
+    @Override
+    public User removePermissionsFromUser(Long userId, Long permissionId) {
+        Set<Permissions> permissionSet = null;
+
+        User user = userRepo.findById(userId).get();
+        Permissions permissions = permissionsRepo.findById(permissionId).get();
+
+        permissionSet = user.getAssignPermissions();
+        permissionSet.remove(permissions);
+
+        user.setAssignPermissions(permissionSet);
+
+        return userRepo.save(user);
     }
 }

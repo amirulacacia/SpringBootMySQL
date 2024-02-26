@@ -17,5 +17,6 @@ public interface UserProfilesService {
     UserProfiles findById(Long id);
 
     UserProfiles save(UserProfiles userProfiles, Long id);
+    
     UserProfiles save(UserProfiles userProfiles);
 }
