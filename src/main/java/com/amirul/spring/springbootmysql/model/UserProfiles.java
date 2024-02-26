@@ -17,7 +17,7 @@ public class UserProfiles {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "profiles_id")
-    private Long id;
+    private Long profilesID;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -35,16 +35,16 @@ public class UserProfiles {
     @NotBlank
     private String avatarUrl;
 
-    public Long getId() {
-        return id;
+    public Long getProfilesID() {
+        return profilesID;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setProfilesID(Long profilesID) {
+        this.profilesID = profilesID;
     }
 
     public Long getUsers() {
-        return users.getId();
+        return users.getUserID();
     }
 
     public void setUsers(User users) {

@@ -18,7 +18,7 @@ public class Permissions {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "permissions_id")
-    private Long id;
+    private Long permissionsID;
 
     @NotBlank
     private String name;
@@ -26,12 +26,12 @@ public class Permissions {
     @ManyToMany(mappedBy = "assignPermissions")
     private Set<User> assignUser = new HashSet<>();
 
-    public Long getId() {
-        return id;
+    public Long getPermissionsID() {
+        return permissionsID;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setPermissionsID(Long permissionsID) {
+        this.permissionsID = permissionsID;
     }
 
     public String getName() {

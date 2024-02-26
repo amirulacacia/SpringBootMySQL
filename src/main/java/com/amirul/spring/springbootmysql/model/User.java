@@ -24,7 +24,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
-    private Long id;
+    private Long userID;
     
     @NotBlank
     private String username;
@@ -50,12 +50,12 @@ public class User {
     )
     private Set<Permissions> assignPermissions = new HashSet<>();
 
-    public Long getId() {
-        return id;
+    public Long getUserID() {
+        return userID;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setUserID(Long userID) {
+        this.userID = userID;
     }
 
     public List<UserProfiles> getUserProfiles() {
