@@ -12,6 +12,4 @@ public class HomeController {
     public String welcomeMessage(){
         return "Hi, welcome to my application";
     }
-
-
 }

@@ -3,13 +3,11 @@ package com.amirul.spring.springbootmysql.controller;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.amirul.spring.springbootmysql.model.Permissions;
-import com.amirul.spring.springbootmysql.repository.PermissionsRepo;
 import com.amirul.spring.springbootmysql.service.PermissionsService;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,10 +18,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 
 @RestController
 @RequestMapping("/permissions")
-@Controller
 public class PermissionsController {
-    @Autowired
-    PermissionsRepo permissionsRepo;
     @Autowired
     PermissionsService permissionsService;
 

@@ -3,12 +3,10 @@ package com.amirul.spring.springbootmysql.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.amirul.spring.springbootmysql.model.UserProfiles;
-import com.amirul.spring.springbootmysql.repository.UserProfilesRepo;
 import com.amirul.spring.springbootmysql.service.UserProfilesService;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,10 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequestMapping("/user")
-@Controller
 public class UserProfilesController {
-    @Autowired
-    UserProfilesRepo userProfilesRepo;
     @Autowired
     UserProfilesService userProfilesService;
 
